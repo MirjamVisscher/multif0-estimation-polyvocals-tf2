@@ -1,8 +1,7 @@
-numpy==1.16.4
-keras==2.3.1
+numpy
+keras
 matplotlib
 pandas
-tensorflow-gpu==1.15.4
 audioread
 jams
 librosa
@@ -11,6 +10,5 @@ muda
 pescador
 pumpp
 pysoundfile
-scipy==1.4.1
 soundfile
 sox
