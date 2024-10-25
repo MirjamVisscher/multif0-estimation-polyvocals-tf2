@@ -18,6 +18,10 @@ import numpy as np
 import os
 import argparse
 
+# this is our replacement function because model.load_weights would call the keras 3 version
+# which complains about incompatibility 
+from load_weights import load_weights
+
 
 def get_single_test_prediction_phase_free(model, audio_file=None):
     """Generate output from a model given an input numpy file
@@ -92,7 +96,8 @@ def main(args):
         save_key = 'exp1multif0'
         model_path = "./models/{}.pkl".format(save_key)
         model = models.build_model1()
-        model.load_weights(model_path)
+        # model.load_weights(model_path)
+        load_weights(model, model_path)
         thresh = 0.4
 
     elif model_name == 'model2':
@@ -100,7 +105,8 @@ def main(args):
         save_key = 'exp2multif0'
         model_path = "./models/{}.pkl".format(save_key)
         model = models.build_model2()
-        model.load_weights(model_path)
+        # model.load_weights(model_path)
+        load_weights(model, model_path)
         thresh = 0.5
 
     elif model_name == 'model3':
@@ -108,7 +114,8 @@ def main(args):
         save_key = 'exp3multif0'
         model_path = "./models/{}.pkl".format(save_key)
         model = models.build_model3()
-        model.load_weights(model_path)
+        # model.load_weights(model_path)
+        load_weights(model, model_path)
         thresh = 0.5
 
     elif model_name == 'model4':
@@ -116,7 +123,8 @@ def main(args):
         save_key = 'exp4multif0'
         model_path = "./models/{}.pkl".format(save_key)
         model = models.build_model3()
-        model.load_weights(model_path)
+        # model.load_weights(model_path)
+        load_weights(model, model_path)
         thresh = 0.4
 
     elif model_name == 'model7':
@@ -124,7 +132,8 @@ def main(args):
         save_key = 'exp7multif0'
         model_path = "./models/{}.pkl".format(save_key)
         model = models.build_model3_mag()
-        model.load_weights(model_path)
+        # model.load_weights(model_path)
+        load_weights(model, model_path)
         thresh = 0.4
 
     else:

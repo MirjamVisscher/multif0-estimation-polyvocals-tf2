@@ -104,7 +104,7 @@ def get_freq_grid():
     """
     (bins_per_octave, n_octaves, _, _, f_min, _, over_sample) = get_hcqt_params()
     freq_grid = librosa.cqt_frequencies(
-        n_octaves * 12 * over_sample, f_min, bins_per_octave=bins_per_octave)
+        n_octaves * 12 * over_sample, fmin=f_min, bins_per_octave=bins_per_octave)
     return freq_grid
 
 

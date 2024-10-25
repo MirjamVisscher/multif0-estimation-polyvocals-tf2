@@ -4,9 +4,14 @@
 
 from keras.models import Model
 from keras.layers import Input, Lambda, Concatenate
-from keras.layers.convolutional import Conv2D
-from keras.layers.normalization import BatchNormalization
+from keras.layers import Conv2D
+from keras.layers import BatchNormalization
 from keras import backend as K
+
+# Note: 
+# new version of Keras does not like dynamic shapes 
+# and there seems to be no more squeeze operation. 
+# So I made a rather crude replacement where needed.
 
 
 def build_model1():
@@ -65,7 +70,9 @@ def build_model1():
     y9a = BatchNormalization()(y9)
 
     y10 = Conv2D(1, (1, 1), padding='same', activation='sigmoid', name='squishy')(y9a)
-    predictions = Lambda(lambda x: K.squeeze(x, axis=3))(y10)
+    # predictions = Lambda(lambda x: K.squeeze(x, axis=3))(y10)
+    # predictions = Lambda(lambda x: K.squeeze(x[:,:,:,0]))(y10)
+    predictions = y10[:,:,:,0]
 
     model = Model(inputs=[inputs1, inputs2], outputs=predictions)
 
@@ -120,7 +127,8 @@ def build_model2():
     y7a = BatchNormalization()(y7)
 
     y8 = Conv2D(1, (1, 1), padding='same', activation='sigmoid', name='squishy')(y7a)
-    predictions = Lambda(lambda x: K.squeeze(x, axis=3))(y8)
+    # predictions = Lambda(lambda x: K.squeeze(x, axis=3))(y8)
+    predictions = y8[:,:,:,0]
 
     model = Model(inputs=[inputs1, inputs2], outputs=predictions)
 
@@ -171,7 +179,8 @@ def build_model1_pf():
     y9a = BatchNormalization()(y9)
 
     y10 = Conv2D(1, (1, 1), padding='same', activation='sigmoid', name='squishy')(y9a)
-    predictions = Lambda(lambda x: K.squeeze(x, axis=3))(y10)
+    # predictions = Lambda(lambda x: K.squeeze(x, axis=3))(y10)
+    predictions = y10[:,:,:,0]
 
     model = Model(inputs=inputs, outputs=predictions)
 
@@ -213,7 +222,8 @@ def build_model2_pf():
     y7a = BatchNormalization()(y7)
 
     y8 = Conv2D(1, (1, 1), padding='same', activation='sigmoid', name='squishy')(y7a)
-    predictions = Lambda(lambda x: K.squeeze(x, axis=3))(y8)
+    # predictions = Lambda(lambda x: K.squeeze(x, axis=3))(y8)
+    predictions = y8[:,:,:,0]
 
     model = Model(inputs=inputs, outputs=predictions)
 
@@ -278,7 +288,8 @@ def build_model3():
     y9a = BatchNormalization()(y9)
 
     y10 = Conv2D(1, (1, 1), padding='same', activation='sigmoid', name='squishy')(y9a)
-    predictions = Lambda(lambda x: K.squeeze(x, axis=3))(y10)
+    # predictions = Lambda(lambda x: K.squeeze(x, axis=3))(y10)
+    predictions = y10[:,:,:,0]
 
     model = Model(inputs=[inputs1, inputs2], outputs=predictions)
 
@@ -306,7 +317,8 @@ def build_model3_mag():
     y9a = BatchNormalization()(y9)
 
     y10 = Conv2D(1, (1, 1), padding='same', activation='sigmoid', name='squishy')(y9a)
-    predictions = Lambda(lambda x: K.squeeze(x, axis=3))(y10)
+    # predictions = Lambda(lambda x: K.squeeze(x, axis=3))(y10)
+    predictions = y10[:,:,:,0]
 
     model = Model(inputs=inputs1, outputs=predictions)
 
